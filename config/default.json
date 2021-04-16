@@ -1,0 +1,3 @@
+{
+    "mongoURI": "mongodb://user123:mysecretpassword@devconnetctor-shard-00-00.7pmzx.mongodb.net:27017,devconnetctor-shard-00-01.7pmzx.mongodb.net:27017,devconnetctor-shard-00-02.7pmzx.mongodb.net:27017/devconnector?ssl=true&replicaSet=atlas-p5abls-shard-0&authSource=admin&retryWrites=true&w=majority"
+}
