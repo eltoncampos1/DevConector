@@ -1,10 +1,11 @@
-const exprees = require("express");
+const express = require("express");
 const connectDB = require("../config/db");
 
+const app = express();
 const router = require("./routes");
 
 connectDB();
-const app = exprees();
+app.use(express.json());
 app.use(router);
 
 const PORT = process.env.PORT || 5000;
