@@ -1,9 +1,11 @@
 const exprees = require("express");
 const connectDB = require("../config/db");
 
-const app = exprees();
+const router = require("./routes");
 
 connectDB();
+const app = exprees();
+app.use(router);
 
 const PORT = process.env.PORT || 5000;
 
