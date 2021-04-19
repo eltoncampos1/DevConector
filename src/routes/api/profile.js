@@ -8,17 +8,25 @@ const User = require("../../models/User");
 
 const profileRouter = Router();
 
-profileRouter.get("/", async (req, res) => {
+profileRouter.get("/user/:user_id", async (req, res) => {
   try {
-    const profiles = await Profile.find().populate("user", ["name", "avatar"]);
-    return res.json(profiles);
+    const profile = await Profile.findOne({
+      user: req.params.user_id,
+    }).populate("user", ["name", "avatar"]);
+
+    if (!profile) return res.status(400).json({ message: "Profile not found" });
+
+    return res.json(profile);
   } catch (err) {
     console.error(err.message);
+    if (err.kind === "ObjectId") {
+      return res.json({ message: "Profile not found" });
+    }
     return res.status(500).send("Server error");
   }
 });
 
-profileRouter.get("/user/:user-id", async (req, res) => {
+profileRouter.get("/", async (req, res) => {
   try {
     const profiles = await Profile.find().populate("user", ["name", "avatar"]);
     return res.json(profiles);
