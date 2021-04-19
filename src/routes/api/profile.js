@@ -126,4 +126,17 @@ profileRouter.post(
   }
 );
 
+profileRouter.delete("/", auth, async (req, res) => {
+  try {
+    await Profile.findOneAndRemove({ user: req.user.id });
+
+    await User.findOneAndRemove({ _id: req.user.id });
+
+    return res.json({ message: "User deleted" });
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).send("Server error");
+  }
+});
+
 module.exports = profileRouter;
